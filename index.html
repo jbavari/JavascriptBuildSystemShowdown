@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section style="height: 100%; width: 100%;">
+					<img src="lib/img/sponsors.png" />
+				</section>
+
+				<section>
+					<h1>Javascript Build System Showdown</h1>
+					<h3></h3>
+					<p>
+						<small>Created by <a href="http://jbavari.github.io">Josh Bavari</a> / <a href="http://twitter.com/jbavari">@jbavari</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>First off - why?</h2>
+					<ul>
+						<li>You're using web technologies (or node)</li>
+						<!-- <li>You want to jslint code, run tests, concatenate, &amp; minify images/html/css</li> -->
+						<li>You want to test &amp; deploy code</li>
+						<li>You want to eliminate boring &amp; manual tasks</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>First off - why?</h2>
+					<p>
+						A lot goes into building a web application these days
+					</p>
+
+					<ul>
+						<li>Preprocess items - LESS/SASS/CoffeeScript</li>
+						<li>Lint code, Run tests</li>
+						<li>Minify assets - HTML/CSS/JS/Images</li>
+						<li>Deploy to CDN / Staging / Prod</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Definition: Build system</h2>
+
+					<p>
+						A build system is a series of tasks executed in certain orders. Lets call build systems as task runners interchangibly. Build systems are mainly concerned with handling the preprocessing, concat/minifying, testing, and release processes.
+					</p>
+				</section>
+
+				<section>
+					<h1>Lets see some in action</h1>
+
+					<p>Demo time!</p>
+				</section>
+
+				<section>
+					<h2>You're probably using a Build system or task runner now</h2>
+
+					<ul>
+						<li>Visual Studio (MSBuild)</li>
+						<li>Apache Ant</li>
+						<li>GNU Make</li>
+						<li>Ruby Make (Rake)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Current Javascript build tools</h2>
+
+					<ul>
+						<li><a href="http://gruntjs.com/">Grunt.js</a></li>
+						<li><a href="http://gulpjs.com/">Gulp.js</a></li>
+						<li><a href="https://github.com/broccolijs/broccoli">Broccoli</a></li>
+						<li><a href="http://brunch.io/">Brunch</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Why so many?</h2>
+
+					<p>
+						Think the systems all being tools in a toolshed. Each tool is used differently. Some focused on strictly atomic tasks. Others focused on one pass through. No tool is wrong, just different approaches.
+					</p>
+				</section>
+
+				<section>
+					<h3>Maturity of projects</h3>
+
+					<ul>
+						<li>Grunt.js - 2+ years out, very mature</li>
+						<li>Gulp.js - ~ August 2013, relatively mature</li>
+						<li>Broccoli - release Feb 2014, still in beta</li>
+						<li>Brunch - 1 year out, mature</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Community Support</h2>
+
+					<ul>
+						<li>Grunt has the most popularity</li>
+						<li>Gulp is the newer kid on the block. Picking up popularity</li>
+						<li>Brunch, fairly new, plenty of plugins &amp; skeletons</li>
+						<li>Broccoli - in beta, have plugins available</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Grunt / Gulp interoperability</h2>
+
+					<p>
+						Grunt has a plugin to run Gulp tasks, and Gulp has a plugin to run Grunt tasks.
+					</p>
+				</section>
+				
+				<section>
+					<h2>Which tool for the task at hand?</h2>
+
+					<p>
+						Each tool has strengths and weaknesses. Your job will be to identify which tool may be best suited for your needs.
+					</p>
+				</section>
+
+				<section>
+					<h2>Grunt.js - strengths</h2>
+
+					<ul>
+						<li>Tons of plugins available</li>
+						<li>Easy to configure individual tasks</li>
+						<li>Easy to use with existing projects</li>
+						<li>Very flexible - allows custom tasks to be written</li>
+						<li>Comes pre-packaged in some generators/scaffolding</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Grunt.js - weaknesses</h2>
+
+					<ul>
+						<li>Plugins do multiple things</li>
+						<li>Headache of temp files/folders</li>
+						<li>Not one solid control flow</li>
+						<li>Configuration can get lengthy - 500+ lines</li>
+						<li>Very lengthy &amp; vast API</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Gulp.js - strengths</h2>
+
+					<ul>
+						<li>Provides node streams - no need for tmp files/folders</li>
+						<li>Tons of plugins available</li>
+						<li>Gulpfile is code, not config</li>
+						<li>Plugins do ONE thing</li>
+						<li>Only has 5 functions to learn!</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Gulp.js - weaknesses</h2>
+
+					<ul>
+						<li>Can be daunting to learn streams</li>
+						<li>Sometimes setting up src/dest can be tricky (use base)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Brunch - strengths</h2>
+
+					<ul>
+						<li>Easy to set up - use skeleton</li>
+						<li>Introduces conventions for you</li>
+						<li>Simple CLI - only a few commands</li>
+						<li>Commands for dev/staging/production releases</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Brunch - weaknesses</h2>
+
+					<ul>
+						<li>Not using conventions causes headaches</li>
+						<li>Not easy to set up with existing projects</li>
+						<li>Skeleton set ups not maintained as fast as plugins</li>
+						<li>Not as supported as Grunt/Gulp</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Broccoli - strengths</h2>
+
+					<ul>
+						<li>Trees allow dev to think of assets</li>
+						<li>Provides caching for map files</li>
+						<li>Makes some conventions for you - assets</li>
+						<li>Watching files handled by serve, only rebuilds whats needed</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Broccoli - weaknesses</h2>
+
+					<ul>
+						<li>No parallelism</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2></h2>
+
+					<p>
+					</p>
+				</section>
+
+				<section>
+					<h2>References</h2>
+
+					<ul>
+						<li><a href="http://chariotsolutions.com/blog/post/grunt-javascript-centric-build-tool/">Grunt - a Javascript-centric build tool</a></li>
+						<li><a href="http://24ways.org/2013/grunt-is-not-weird-and-hard/">Grunt for People Who Think Things Like Grunt are Weird and Hard</a></li>
+						<li><a href="http://slides.com/contra/gulp">Gulp - the streaming build system (slides)</a></li>
+						<li><a href="http://www.sitepoint.com/introduction-gulp-js/">Introduction to Gulp.js (Gulp vs Grunt)</a></li>
+						<li><a href="http://alxhill.com/blog/articles/brunch-coffeescript-angular/">Brunch - A build system without the Grunt-work</a></li>
+						<li><a href="http://www.solitr.com/blog/2014/02/broccoli-first-release/">Broccoli: First Beta Release</a></li>
+						<li><a href="http://ampersate.com/getting-started-with-broccoli-and-emberjs">Getting started with Broccoli and Ember.js</a></li>
+					</ul>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

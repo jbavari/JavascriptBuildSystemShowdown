@@ -1,0 +1,19 @@
+{
+	"curly": false,
+	"eqeqeq": true,
+	"immed": true,
+	"latedef": true,
+	"newcap": true,
+	"noarg": true,
+	"sub": true,
+	"undef": true,
+	"eqnull": true,
+	"browser": true,
+	"expr": true,
+	"predef": [
+		"head",
+		"module",
+		"console",
+		"unescape"
+	]
+}
