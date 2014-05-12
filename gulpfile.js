@@ -6,7 +6,9 @@ var uglify = require('gulp-uglify');
 var qunit = require('gulp-qunit');
 var sass = require('gulp-sass');
 var zip = require('gulp-zip');
+var connect = require('gulp-connect');
 
+//Define individual tasks
 gulp.task('jshint', function(){
 	return gulp.src([ 'Gruntfile.js', 'js/reveal.js' ])
 		.pipe(jshint())
@@ -50,15 +52,24 @@ gulp.task('zip', function(){
 			.pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['jshint', 'cssmin', 'uglify', 'qunit']);
+gulp.task('connect', function(){
+	connect.server({
+		root: '.',
+		livereload: true
+	});
+});
 
-// zip: {
-// 			'reveal-js-presentation.zip': [
-// 				'index.html',
-// 				'css/**',
-// 				'js/**',
-// 				'lib/**',
-// 				'images/**',
-// 				'plugin/**'
-// 			]
-// 		},
+gulp.task('html', function () {
+	gulp.src('./*.html')
+		.pipe(connect.reload());
+});
+
+gulp.task('watch', function () {
+	gulp.watch(['./*.html'], ['html']);
+});
+
+//Define aggregate tasks
+gulp.task('default', ['jshint', 'cssmin', 'uglify', 'qunit']);
+gulp.task('package', ['default', 'zip']);
+gulp.task('serve', ['connect', 'watch']);
+gulp.task('test', ['jshint', 'qunit']);
