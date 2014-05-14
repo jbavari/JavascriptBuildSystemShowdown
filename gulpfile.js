@@ -65,11 +65,11 @@ gulp.task('html', function () {
 });
 
 gulp.task('watch', function () {
-	gulp.watch(['./*.html'], ['html']);
+	gulp.watch(['./*.html', 'css/*.css'], ['html']);
 });
 
 //Define aggregate tasks
 gulp.task('default', ['jshint', 'cssmin', 'uglify', 'qunit']);
 gulp.task('package', ['default', 'zip']);
-gulp.task('serve', ['connect', 'watch']);
+gulp.task('serve', ['default', 'connect', 'watch']);
 gulp.task('test', ['jshint', 'qunit']);

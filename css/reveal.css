@@ -1266,7 +1266,6 @@ body {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: rgba( 0, 0, 0, 0 );
 
 	-webkit-transition: background 800ms ease;
 	   -moz-transition: background 800ms ease;
@@ -1878,3 +1877,9 @@ body {
 }
 
 
+.centeredPic {
+	height: 80%;
+	display: block;
+	margin: 0 auto !important;
+	width: 80%;
+}

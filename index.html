@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Javascript Build System Showdown</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -14,7 +14,7 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
@@ -46,7 +46,7 @@
 					<img src="lib/img/sponsors.png" />
 				</section>
 
-				<section>
+				<section data-background="https://s3.amazonaws.com/uploads.hipchat.com/41403/429435/0UHOP4UfbAaDxOC/grunt-blank.jpg" data-background-repeat="no-repeat" data-background-position="0 0">
 					<h1>Javascript Build System Showdown</h1>
 					<h3></h3>
 					<p>
@@ -55,20 +55,63 @@
 				</section>
 
 				<section>
-					<h2>First off - why?</h2>
+					<h2>What this talk is about</h2>
+
 					<ul>
-						<li>You're using web technologies (or node)</li>
-						<!-- <li>You want to jslint code, run tests, concatenate, &amp; minify images/html/css</li> -->
-						<li>You want to test &amp; deploy code</li>
-						<li>You want to eliminate boring &amp; manual tasks</li>
+						<li>Understanding issues facing web development</li>
+						<li>Understanding issues facing Nodejs development</li>
+						<li>General derp issues facing Javascript development</li>
+						<li>Solutions for solving above issues</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>First off - why?</h2>
-					<p>
-						A lot goes into building a web application these days
-					</p>
+					<ul>
+						<li>You write a lot of Javascript</li>
+						<li>You want to concat/minify assets</li>
+						<li>You want to remove unused CSS</li>
+						<li>You NEED to eliminate (boring) manual tasks</li>
+						<li>You want to lint, test &amp; deploy code</li>
+						<li>You want browser to auto-refresh when you modify files</li>
+					</ul>
+
+					<aside class="notes">
+						Most development environments have had build system in place for a while. For visual studio, it relies on MSBuild under the covers to pull assets together and compile binaries. In the Java world, you've got ant that runs around from its xml file and puts things into place. In Ruby land, we have rake files to instruct rake on what to do and how to do it. Javascript has only recently gotten mature tools equal to the other development stacks.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Second, a story</h2>
+
+					<ul>
+						<li>First began mobile Phonegap app on iOS / Android - early 2012</li>
+						<li>Purely HTML/Javascript with some native code</li>
+						<li>Build/release cycle was rough</li>
+						<li>Processes - manual. Not fun &amp; tons of errors</li>
+					</ul>
+
+					<aside class="notes">
+					My own personal background has been manual hammer first attacks at Javascript tasks. Then moved back into the stone age and shell scripts for calling linters, copying code around, and calling other programs. I needed a central tool to handle all of this for me instead of myself running tasks that I am bound to fat finger and mistake something. That and our build process was copy/pasting in keys/ids/urls, much error prone. Our releases to apple become more and more buggy, as well as our actual apps being plagued with bugs. We needed something to take the manual tasks and automate them away.
+					</aside>
+				</section>
+
+				<section>
+					Funny meme (Bang head)
+				</section>
+
+				<section>
+					<h2>Then, Evolution!</h2>
+
+					<ul>
+						<li>Began to seek out better tools, processes, &amp; methodologies</li>
+						<li>Started with basic shell scripts to orchestrate</li>
+						<li>Found Grunt, began to automate boring mundane tasks, lint code, run tests, compile sass, &amp; deploy code</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Data &amp; errors arent cheap</h2>
 
 					<ul>
 						<li>Preprocess items - LESS/SASS/CoffeeScript</li>
@@ -79,21 +122,37 @@
 				</section>
 
 				<section>
-					<h2>Definition: Build system</h2>
+					<h2>Definition: build system</h2>
 
-					<p>
-						A build system is a series of tasks executed in certain orders. Lets call build systems as task runners interchangibly. Build systems are mainly concerned with handling the preprocessing, concat/minifying, testing, and release processes.
-					</p>
+					<ul>
+						<li>Build system = series of task exec in order</li>
+						<li>Javascript tools call themselves task runners</li>
+						<li>Let build system == task runners</li>
+					</ul>
+
+					<aside class="notes">
+						Lets call a build system a series of tasks executed in a certain order. Javascript tools call themselves task runners, so lets use build systems interchangibly. Build systems are mainly concerned with handling the preprocessing, concat/minifying, testing, and release processes.
+					</aside>
 				</section>
 
 				<section>
-					<h1>Lets see some in action</h1>
+					<h1>Put up or shut up</h1>
 
 					<p>Demo time!</p>
+					<aside class="notes">
+						Showing code/demo of Gruntfile.js located in root directory, then code/demo of Gulpfile.js in root dir, then broccoli commands, followed by brunch commands.
+					</aside>
 				</section>
 
 				<section>
-					<h2>You're probably using a Build system or task runner now</h2>
+					<h2>Your reaction</h2>
+
+					<img class="centeredPic" src="http://www.reactiongifs.com/r/srcstc.gif">
+
+				</section>
+
+				<section>
+					<h2>You're using a build system now</h2>
 
 					<ul>
 						<li>Visual Studio (MSBuild)</li>
@@ -126,10 +185,10 @@
 					<h3>Maturity of projects</h3>
 
 					<ul>
-						<li>Grunt.js - 2+ years out, very mature</li>
-						<li>Gulp.js - ~ August 2013, relatively mature</li>
-						<li>Broccoli - release Feb 2014, still in beta</li>
-						<li>Brunch - 1 year out, mature</li>
+						<li>Brunch - Jan 2011, very mature</li>
+						<li>Grunt.js - Mar 2012, very mature</li>
+						<li>Gulp.js - ~ Aug 2013, relatively mature</li>
+						<li>Broccoli - Feb 2014, still in beta</li>
 					</ul>
 				</section>
 
@@ -161,28 +220,50 @@
 				</section>
 
 				<section>
-					<h2>Grunt.js - strengths</h2>
+					<section>
+						<h2>Grunt.js - strengths</h2>
 
-					<ul>
-						<li>Tons of plugins available</li>
-						<li>Easy to configure individual tasks</li>
-						<li>Easy to use with existing projects</li>
-						<li>Very flexible - allows custom tasks to be written</li>
-						<li>Comes pre-packaged in some generators/scaffolding</li>
-					</ul>
-				</section>
+						<ul>
+							<li>Tons of plugins available</li>
+							<li>Easy to configure individual tasks</li>
+							<li>Easy to use with existing projects</li>
+							<li>Very flexible - allows custom tasks to be written</li>
+							<li>Comes pre-packaged in some generators/scaffolding</li>
+						</ul>
+					</section>
 
-				<section>
-					<h2>Grunt.js - weaknesses</h2>
+					<section>
+						<h2>Grunt.js - weaknesses</h2>
 
-					<ul>
-						<li>Plugins do multiple things</li>
-						<li>Headache of temp files/folders</li>
-						<li>Not one solid control flow</li>
-						<li>Configuration can get lengthy - 500+ lines</li>
-						<li>Very lengthy &amp; vast API</li>
-					</ul>
-				</section>
+						<ul>
+							<li>Plugins do multiple things</li>
+							<li>Headache of temp files/folders</li>
+							<li>Not one solid control flow</li>
+							<li>Configuration can get lengthy - 500+ lines</li>
+							<li>Very lengthy &amp; vast API</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Grunt.js - annoyances</h2>
+
+						<ul>
+							<li>Tons and tons of temp files &amp; tasks to clean up</li>
+							<li>Can get pretty slow when tasks increase</li>
+						</ul>
+
+					</section>
+
+					<section>
+						<h2>Gruntfile</h2>
+
+						<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+Gruntfile here.
+						</code></pre>
+					</section>
+			</section>
+
+			<section>
 
 				<section>
 					<h2>Gulp.js - strengths</h2>
@@ -204,7 +285,23 @@
 						<li>Sometimes setting up src/dest can be tricky (use base)</li>
 					</ul>
 				</section>
+				
+				<section>
+					<h2>Gulp.js - annoyances</h2>
 
+					<p>Havent used long enough to form any</p>
+				</section>
+
+				<section>
+					<h2>gulpfile.js</h2>
+
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+gulpfile here.
+					</code></pre>
+
+				</section>
+			</section>
+			<section>
 				<section>
 					<h2>Brunch - strengths</h2>
 
@@ -226,7 +323,9 @@
 						<li>Not as supported as Grunt/Gulp</li>
 					</ul>
 				</section>
+			</section>
 
+			<section>
 				<section>
 					<h2>Broccoli - strengths</h2>
 
@@ -245,11 +344,14 @@
 						<li>No parallelism</li>
 					</ul>
 				</section>
+			</section>
 
 				<section>
-					<h2></h2>
+					<h2>Choosing YOUR build strategy</h2>
 
-					<p>
+					<p> 
+						Start by being honest and addressing your needs. If you need maturity &amp; great community support, stick with Grunt or Gulp.
+						If you want instant gratification, start with Grunt. If you need utter speed, go with Gulp. If you want help with choosing an asset strategy, or conventions, go with Brunch. If you're an Ember fan, I'd suggest Broccoli, as its tied into Ember CLI.
 					</p>
 				</section>
 
@@ -262,8 +364,13 @@
 						<li><a href="http://slides.com/contra/gulp">Gulp - the streaming build system (slides)</a></li>
 						<li><a href="http://www.sitepoint.com/introduction-gulp-js/">Introduction to Gulp.js (Gulp vs Grunt)</a></li>
 						<li><a href="http://alxhill.com/blog/articles/brunch-coffeescript-angular/">Brunch - A build system without the Grunt-work</a></li>
+						<li><a href="http://blog.toggl.com/2014/03/grunt-vs-gulp-vs-brunch/">Grunt vs gulp vs brunch</a></li>
 						<li><a href="http://www.solitr.com/blog/2014/02/broccoli-first-release/">Broccoli: First Beta Release</a></li>
 						<li><a href="http://ampersate.com/getting-started-with-broccoli-and-emberjs">Getting started with Broccoli and Ember.js</a></li>
+						<li><a href="http://www.confreaks.com/videos/3301-emberconf2014-no-more-grunt-watch-modern-build-workflows-with-broccoli">Ember Conf - No more `grunt watch`: Modern build workflows with Broccoli</a></li>
+						<li><a href="http://www.octolabs.com/blogs/octoblog/2014/05/10/ember-cli-broccoli-bootstrap-sass-part-2/">Ember-cli, broccoli, bootstrap &amp; sass : Part 2</a></li>
+						<li><a href="https://gist.github.com/callumacrae/9231589">Gist of Javascript build tools</a></li>
+						<li><a href="https://github.com/gulpjs/plugins/commit/0dbaa9eba2ff423f0e1b5785c43c2c20bda9a879">Proof of gulpjs plugin site using brunch, grunt, &amp; gulp</a></li>
 					</ul>
 				</section>
 
