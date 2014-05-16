@@ -31,6 +31,58 @@
 			}
 		</script>
 
+		<style type="text/css">
+            /*.reveal .state-background  {
+                background-image: url(https://s3.amazonaws.com/uploads.hipchat.com/41403/429435/YgVwok4JIb4sHUr/grunt-slide-idea.jpg);
+                background-repeat: no-repeat;
+                background-color: #262A2D;
+                background-size: 100%;
+            }*/
+            ul.automate {
+                float: left; 
+                width: 40%; 
+                list-style-type: none !important;
+            }
+
+            ul.automate:first {
+                margin-left: 20%;
+            }
+
+            .grunt_orange {
+                color: #e48632;
+            }
+
+            .reveal pre {
+                font-size: 1.1em !important;
+            }
+
+            #edit_changes {
+                color: #4C2CC0;
+                margin: 5px;
+                padding: 30px;
+                font-size: 1.3em;
+                border-radius: 15px;
+                box-shadow: 2px 2px #e48632;
+                outline: 0;
+            }
+
+            #code_highlight {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            #code_highlight pre, #code_highlight code {
+                height: 100%;
+                width: 100%;
+                font-size: 1.5em;
+                overflow: auto;
+            }
+        </style>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -97,7 +149,7 @@
 				</section>
 
 				<section>
-					Funny meme (Bang head)
+					<img src="css/giveup.gif" />
 				</section>
 
 				<section>
@@ -147,7 +199,7 @@
 				<section>
 					<h2>Your reaction</h2>
 
-					<img class="centeredPic" src="http://www.reactiongifs.com/r/srcstc.gif">
+					<img class="centeredPic" src="css/clap.gif">
 
 				</section>
 
@@ -159,6 +211,16 @@
 						<li>Apache Ant</li>
 						<li>GNU Make</li>
 						<li>Ruby Make (Rake)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Prereqs</h2>
+
+					<ul>
+						<li>Node</li>
+						<li>npm</li>
+						<li>package.json - specifying packages</li>
 					</ul>
 				</section>
 
@@ -222,11 +284,83 @@
 				<section data-background="css/grunt-faded.png" data-background-repeat="no-repeat" data-background-position="0 0">
 					<section data-background="css/grunt-highlight.png" data-background-repeat="no-repeat" data-background-position="0 0">
 						<h2>Grunt.js</h2>
-
-						<p>
-
-						</p>
 					</section>
+
+					<section>
+						<h2>Getting started</h2>
+
+						<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+//Install grunt command line tools
+npm install -g grunt-cli
+//Specify plugins by saving to package.json file
+npm install grunt-contrib-uglify --save-dev 
+npm install grunt-contrib-concat --save-dev
+						</code></pre>
+                        <button class="code_enlarge">Enlarge</button>
+
+					</section>
+
+					<section>
+						<h2>Gruntfile Configuration</h2>
+						<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+grunt.initConfig({
+   our_file_list: ['./src/js/{Models,Controllers}/*.js', './src/js/index.js'], 
+   uglify: {
+      build: {
+          src: 'js/reveal.js',
+          dest: 'js/reveal.min.js'
+      },
+      all: {
+         files: {
+            'js/compiled/file.js': '<%= our_file_list %>',
+         }
+      }
+   },
+   concat: {
+      dist: {
+         src: ['js/reveal.min.js', 'js/compiled/file.js'],
+         dest: 'dist/built.js',
+      },
+   }
+});
+						</code></pre>
+                        <button class="code_enlarge">Enlarge</button>
+
+					</section>
+
+					<section>
+						<h2>Plugins via package.json</h2>
+
+						<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+{
+  "name": "my-project-name",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.3.3",
+    "grunt-contrib-uglify": "~0.4.0"
+  }
+}
+						</code></pre>
+                        <button class="code_enlarge">Enlarge</button>
+
+					</section>
+
+					<section>
+						<h2>Command Line Usage</h2>
+						<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+//Run all uglify targets
+grunt uglify
+//Execute uglify, but only the all target
+grunt uglify:all
+
+						</code></pre>
+                        <button class="code_enlarge">Enlarge</button>
+
+
+					</section>
+
 					<section >
 						<h2>Grunt.js - strengths</h2>
 
@@ -260,23 +394,54 @@
 						</ul>
 
 					</section>
-
-					<section>
-						<h2>Gruntfile</h2>
-
-						<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Gruntfile here.
-						</code></pre>
-					</section>
 			</section>
 
 			<section data-background="css/gulp-faded.png" data-background-repeat="no-repeat" data-background-position="0 0">
 				<section data-background="css/gulp-highlight.png" data-background-repeat="no-repeat" data-background-position="0 0">
 					<h2>Gulp.js</h2>
+				</section>
 
-					<p>
-						Focused on using Node.js like streams. Keeps files in memory to edit.
-					</p>
+				<section>
+					<h2>Getting started</h2>
+
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+//Install grunt command line tools
+npm install -g gulp
+//Specify plugins by saving to package.json file
+npm install --save-dev gulp-uglify
+npm install --save-dev gulp-concat
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+
+				</section>
+
+				<section>
+					<h2>gulpfile Configuration</h2>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+var gulp = require('gulp');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+gulp.task('scripts', function() {
+   // Minify and copy all JavaScript (except vendor scripts)
+   return gulp.src(paths.scripts)
+      .pipe(uglify())
+      .pipe(concat('all.min.js'))
+      .pipe(gulp.dest('build/js'));
+});
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+
+				</section>
+
+				<section>
+					<h2>Command Line Usage</h2>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+//Run all uglify targets
+gulp scripts
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+
+
 				</section>
 
 				<section>
@@ -305,15 +470,6 @@ Gruntfile here.
 
 					<p>Havent used long enough to form any</p>
 				</section>
-
-				<section>
-					<h2>gulpfile.js</h2>
-
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-gulpfile here.
-					</code></pre>
-
-				</section>
 			</section>
 
 			<section data-background="css/brunch-faded.png" data-background-repeat="no-repeat" data-background-position="0 0">
@@ -321,9 +477,26 @@ gulpfile here.
 					<h2>Brunch</h2>
 
 					<p>
-						The first build system widely used and available.
+						The first build system widely used and available. Uses skeletons (like scaffolding) to create app directory structure.
 					</p>
 				</section>
+
+				<section>
+					<h2>Getting started</h2>
+
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+//Create new skeleton of angular app
+brunch new https://github.com/scotch/angular-brunch-seed myapp
+//Install bower packages (css/js/etc)
+bower install
+//tell Brunch to watch your project and incrementally rebuild it when source files are changed
+brunch watch --server
+//builds a project for distribution. By default it enables minification
+brunch build --production
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+				</section>
+
 				<section>
 					<h2>Brunch - strengths</h2>
 
@@ -376,10 +549,12 @@ gulpfile here.
 				<section>
 					<h2>Choosing YOUR build strategy</h2>
 
-					<p> 
-						Start by being honest and addressing your needs. If you need maturity &amp; great community support, stick with Grunt or Gulp.
-						If you want instant gratification, start with Grunt. If you need utter speed, go with Gulp. If you want help with choosing an asset strategy, or conventions, go with Brunch. If you're an Ember fan, I'd suggest Broccoli, as its tied into Ember CLI.
-					</p>
+					<ul> 
+						<li>If you need tons of plugins, stick with Grunt or Gulp</li>
+						<li>If you need utter speed, go with Gulp</li>
+						<li>If you want conventions, go with Brunch</li>
+						<li>If you're an Ember fan, go with Broccoli (tied into Ember CLI)</li>
+					</ul>
 				</section>
 
 				<section>
@@ -407,6 +582,7 @@ gulpfile here.
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
+		<script src="js/jquery.js"></script>
 
 		<script>
 
@@ -436,7 +612,37 @@ gulpfile here.
 				]
 			});
 
+		var codeHighlight = false;
+
+        $(function(){
+            $(document).on("click", ".code_enlarge", function(e) {
+                var code = $(this).parent().find("code");
+                $("#code_highlight").css("display", "block");
+                $("#code_highlight").find("code").text(code.text());
+                codeHighlight = true;
+                hljs.highlightBlock($("#code_highlight").find("code")[0]);
+                e.preventDefault();
+                return false;
+            });
+
+            $(document).on("click", "#code_close", function(e){
+                if(codeHighlight) {
+                    $("#code_highlight").css("display", "none");
+                    codeHighlight = false;
+                }
+                e.preventDefault();
+                return false;
+            });
+        })
+
 		</script>
+
+        <div id="code_highlight" style="display: none">
+            <pre><code data-trim contenteditable>
+            </code></pre>
+
+            <button id="code_close" style="position: absolute; top: 0; right: 100px;">Close</button>
+        </div>
 
 	</body>
 </html>
